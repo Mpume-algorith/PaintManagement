@@ -1,0 +1,108 @@
+﻿@model PagedList.IPagedList<PaintManagement.Models.ProductOrder>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="~/Content/MyStyle.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+@{
+    ViewBag.Title = "Product Orders";
+}
+
+
+
+
+<html lang="en">
+
+<body>
+    <img src="~/Images/285131_363979710352180_1850381867_n.jpg" style="width:80px;height:80px; float:right" />
+
+    <h2>Product Orders</h2>
+    <i class="fa fa-archive fa-2x" style="font-size:50px; color:grey"></i>
+
+    <hr>
+
+    <p>
+        @Html.ActionLink("Create New", "Create", null, new { style = "font-size:larger" })
+    </p>
+    @using (Html.BeginForm("Index", "Product Order", FormMethod.Get))
+    {
+        <p>
+            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+            <input type="submit" value="Search" />
+            @Html.ActionLink("Clear", "Index", null, new { @class = "btn btn-default" })
+        </p>
+        <p>  Click on Date Ordered to sort by Date</p>
+        <p>  Click on AmountDue to sort by Amount</p>
+    }
+    <hr>
+    <div class="table-wrapper">
+        <table class="table table-bordered">
+
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>
+                    Manager
+                </th>
+                <th>
+                    Supplier
+                </th>>
+                <th>
+                    Quantity(No. of Bottles)
+                </th>
+                <th>
+                    @Html.ActionLink("Date Ordered", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter, style = "color:white" })
+                </th>
+
+                <th>
+                    @Html.ActionLink("Amount Due", "Index", new { sortOrder = ViewBag.AmountDueSortParm, currentFilter = ViewBag.CurrentFilter, style = "color:white" })
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Manager.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Supplier.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AmountDue)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID, style = "color:black" }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ID, style = "color:black" }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID, style = "color:black" })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+    <br />
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+
+</body>
+</html>
+<div class="footer">
+    <p>2020 Green Gecko Paint Management</p>
+</div>

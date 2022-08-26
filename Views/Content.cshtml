@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "Content";
+}
+
+<h2>Content</h2>
+
+@using (Html.BeginForm("Create", "Content", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="file" name="ImageData" id="ImageData" onchange="fileCheck(this);" />
+
+}
+

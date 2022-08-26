@@ -1,0 +1,94 @@
+﻿@model PaintManagement.Models.ProductOrder
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+@{
+    ViewBag.Title = "Details";
+}
+<img src="~/Images/285131_363979710352180_1850381867_n.jpg" style="width:80px;height:80px; float:right" />
+
+<i class="fa fa-archive fa-2x" style="font-size:50px; color:grey"></i>
+<h2>Details</h2>
+
+<div>
+    <h4>ProductOrder</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Paints)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Paints)
+        </dd>
+
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>PaintID</th>
+                    <th>Name</th>
+                </tr>
+                @foreach (var item in Model.Paints)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PaintID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Manager.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Manager.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Supplier.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Supplier.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AmountDue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AmountDue)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+<div class="footer">
+    <p>2020 Green Gecko Paint Management</p>
+</div>

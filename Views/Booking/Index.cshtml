@@ -1,0 +1,102 @@
+﻿
+@model PagedList.IPagedList<PaintManagement.Models.Booking>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="~/Content/MyStyle.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+@{
+    ViewBag.Title = "Bookings";
+}
+
+
+<img src="~/Images/285131_363979710352180_1850381867_n.jpg" style="width:80px;height:80px; float:right" />
+
+<h2>Bookings</h2>
+<i class="fa fa-calendar fa-2x" style="font-size:50px; color:grey"></i>
+
+
+
+<hr>
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { style = "font-size:larger" })
+
+</p>
+@using (Html.BeginForm("Index", "Booking", FormMethod.Get))
+{
+
+    <p>
+        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+        @Html.ActionLink("Clear", "Index", null, new { @class = "btn btn-default" })
+
+    </p>
+    <p>  Click on Date to sort by date</p>
+}
+<hr>
+
+<div class="table-wrapper">
+    <table class="table table-bordered" align="center">
+      
+        <tr>
+            <th>
+                BookingID
+            </th>
+            <th>
+                Customer Name
+            </th>
+            <th>
+                Workshop Description
+            </th>
+            <th>
+                @Html.ActionLink("Date", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter, style = "color:white" })
+            </th>
+            <th>
+                Time
+            </th>
+
+            <th>
+                Cost
+            </th>
+            
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookingID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Workshop.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Time)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cost)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.BookingID, style = "color:black" }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.BookingID, style = "color:black" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.BookingID, style = "color:black" })
+                </td>
+            </tr>
+        }
+
+
+    </table>
+</div>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+<div class="footer">
+    <p>2020 Green Gecko Paint Management</p>
+</div>

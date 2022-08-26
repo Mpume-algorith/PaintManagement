@@ -1,0 +1,12 @@
+﻿th {
+    background-color: black;
+    color: lawngreen;
+    border: 1px solid #dddddd;
+}
+hr{
+    color:grey;
+    border: 1px solid;
+}
+.form{
+    position:center
+}

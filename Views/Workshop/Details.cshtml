@@ -1,0 +1,82 @@
+﻿@model PaintManagement.Models.Workshop
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+@{
+    ViewBag.Title = "Details";
+}
+<img src="~/Images/285131_363979710352180_1850381867_n.jpg" style="width:80px;height:80px; float:right" />
+<i class="fa fa-paint-brush fa-2x" style="font-size:50px; color:grey"></i>
+
+<h2>Details</h2>
+
+<div>
+    <h4>Workshop</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Place)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Place)
+        </dd>
+
+        <h5><b>Bookings</b></h5>
+        <dd>
+
+            <table class="table table-bordered">
+                <tr>
+                    <th>BookingID</th>
+                    <th>Cost</th>
+                    <th>Customer</th>
+                </tr>
+                @foreach (var item in Model.Bookings)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BookingID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cost)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Customer.Name)
+                        </td>
+                    </tr>
+                }
+            </table>
+
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.WorkshopID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+<div class="footer">
+    <p>2020 Green Gecko Paint Management</p>
+</div>

@@ -1,0 +1,48 @@
+﻿@model IEnumerable<PaintManagement.ViewModels.TopCustomer>
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<h2 style="text-align:center"><b>Dashboard</b></h2>
+<br />
+<div class="report_tables">
+    <h4 style="text-align:center"><b>This is a table that shows customers who have ordered the most paint as of @ViewBag.Date</b></h4>
+    <br />
+    <br />
+    <div style="text-align:left">@Html.ActionLink("Press this link to see Revenue Per Month chart", "Revenue")</div>
+    <h3>Top 5 Customers</h3>
+    <table class=" table">
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Phone Number
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Order Quantity
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Orders)
+                </td>
+            </tr>
+        }
+    </table>
+
+</div>

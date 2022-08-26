@@ -1,0 +1,111 @@
+﻿@model PaintManagement.Models.Customer
+
+@{
+    ViewBag.Title = "Details";
+}
+<img src="~/Images/285131_363979710352180_1850381867_n.jpg" style="width:80px;height:80px; float:right" />
+
+<img src="~/Images/23A-1User-512.png" style="width:90px;height:90px" />
+<h2>Details</h2>
+
+<div>
+    <h4>Customer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <h5><b>Bookings</b></h5>
+        <dd>
+            <table class="table table-bordered">
+                <tr>
+                    <th>
+                        BookingID
+                    </th>
+                    <th>
+                        Booking Date
+                    </th>
+                    <th>
+                        Workhop Description
+                    </th>
+                </tr>
+                @foreach (var item in Model.Bookings)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BookingID)
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Workshop.Description)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
+
+
+
+        <h5><b>Orders</b></h5>
+        <dd>
+            <table class="table table-bordered">
+                <tr>
+                    <th>
+                        OrderID
+                    </th>
+                    <th>
+                        OrderDate
+                    </th>
+                    <th>
+                        Amount Due
+                    </th>
+                </tr>
+                @foreach (var item in Model.Orders)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderID)
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Amount)
+                        </td>
+                    </tr>
+                }
+            </table>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CustomerID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+<div class="footer">
+    <p>2020 Green Gecko Paint Management</p>
+</div>

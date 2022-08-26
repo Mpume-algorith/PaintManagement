@@ -1,0 +1,39 @@
+﻿@model IEnumerable<PaintManagement.ViewModels.PaintQuantity>
+
+@{
+    ViewBag.Title = "StockCheck";
+}
+
+<h2>Paint Quanity check</h2>
+
+<table class="table">
+    <tr>
+        
+        <th>
+            Paint Name
+        </th>
+        <th>
+           Quantity
+        </th>
+        
+    </tr>
+
+   
+    @foreach(var item in Model)
+    {
+        <tr>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.PaintName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+        </tr>
+    }
+
+</table>
+<p>
+   
+
+

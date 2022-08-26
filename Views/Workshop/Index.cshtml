@@ -1,0 +1,122 @@
+﻿@model PagedList.IPagedList<PaintManagement.Models.Workshop>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="~/Content/MyStyle.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+@{
+    ViewBag.Title = "Workshops";
+}
+<img src="~/Images/285131_363979710352180_1850381867_n.jpg" style="width:80px;height:80px; float:right" />
+<h2>Workshops</h2>
+<i class="fa fa-paint-brush fa-2x" style="font-size:50px; color:grey"></i>
+<hr>
+<p>
+    @Html.ActionLink("Create New", "Create", null, new { style = "font-size:larger" })
+</p>
+
+
+@using (Html.BeginForm("Index", "Workshop", FormMethod.Get))
+{
+    <p>
+        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+        @Html.ActionLink("Clear", "Index", null, new { @class = "btn btn-default" })
+    </p>
+    <p> Click on Date to sort by Date</p>
+    <p>Click on Place to sort by Place</p>
+ }
+        <hr>
+        <iframe src="https://calendar.google.com/calendar/embed?src=greengeckopaint%40gmail.com&ctz=Africa%2FJohannesburg" style="border: 0" width="1000" height="500" frameborder="0" scrolling="no"></iframe>
+
+        <div class="table-wrapper">
+            <table class="table table-bordered">
+
+                <tr>
+                    <th>
+                        WorkshopID
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                    <th>
+                        @Html.ActionLink("Date", "Index", new { sortOrder = ViewBag.DateSortParm, style = "color:white" })
+                    </th>
+                    <th>
+                        Time
+                    </th>
+                    <th>
+                        @Html.ActionLink("Place", "Index", new { sortOrder = ViewBag.PlaceSortParm, style = "color:white" })
+                    </th>
+              
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.WorkshopID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Time)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Place)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.WorkshopID, style = "color:black" }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.WorkshopID, style = "color:black" }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.WorkshopID, style = "color:black" })
+                        </td>
+                    </tr>
+                }
+                <hr>
+            </table>
+            <table class="table table-bordered" style="width:100px">
+                <caption> Worskhop Descriptions</caption>
+                <thead>
+                    <tr>
+                        <th> Workshop</th>
+                        <th> Description</th>
+                    </tr>
+                    <tr>
+                        <td> Furn0901</td>
+                        <td> Furniture, September 1st</td>
+                    </tr>
+                    <tr>
+                        <td>Bag0902</td>
+                        <td> Bags, September 2nd</td>
+                    </tr>
+                    <tr>
+                        <td> Ch0718</td>
+                        <td> Chair, August 18th </td>
+                    </tr>
+                    <tr>
+                        <td> Clo0625</td>
+                        <td> Clothes, June 25th</td>
+                    </tr>
+                    <tr>
+                        <td>Sho0725</td>
+                        <td> Shoes, July 25th</td>
+                    </tr>
+
+
+                </thead>
+            </table>
+
+
+            <br />
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+            @Html.PagedListPager(Model, page => Url.Action("Index",
+                new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+        </div>
+        <div class="footer">
+            <p>2020 Green Gecko Paint Management</p>
+        </div>
