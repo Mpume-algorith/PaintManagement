@@ -9,7 +9,6 @@ using System.Web.Mvc;
 using PaintManagement.DAL;
 using PaintManagement.Models;
 using PagedList;
-using Microsoft.CodeAnalysis.CSharp;
 
 namespace PaintManagement.Controllers
 {

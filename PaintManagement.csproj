@@ -815,38 +815,6 @@
     <Compile Include="Migrations\202009021654163_ValidatingEntities.designer.cs">
       <DependentUpon>202009021654163_ValidatingEntities.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202009061643111_IncreasingPaint.cs" />
-    <Compile Include="Migrations\202009061643111_IncreasingPaint.Designer.cs">
-      <DependentUpon>202009061643111_IncreasingPaint.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202009112145542_PersonValidation.cs" />
-    <Compile Include="Migrations\202009112145542_PersonValidation.Designer.cs">
-      <DependentUpon>202009112145542_PersonValidation.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202009121456102_ChangingWorkshopDate.cs" />
-    <Compile Include="Migrations\202009121456102_ChangingWorkshopDate.Designer.cs">
-      <DependentUpon>202009121456102_ChangingWorkshopDate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202009201732569_PaintQuantity.cs" />
-    <Compile Include="Migrations\202009201732569_PaintQuantity.Designer.cs">
-      <DependentUpon>202009201732569_PaintQuantity.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202009211740157_ManytoManyTable.cs" />
-    <Compile Include="Migrations\202009211740157_ManytoManyTable.Designer.cs">
-      <DependentUpon>202009211740157_ManytoManyTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202009211834401_ManytoMany2.cs" />
-    <Compile Include="Migrations\202009211834401_ManytoMany2.Designer.cs">
-      <DependentUpon>202009211834401_ManytoMany2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202009222127367_BookingInitialise.cs" />
-    <Compile Include="Migrations\202009222127367_BookingInitialise.Designer.cs">
-      <DependentUpon>202009222127367_BookingInitialise.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202009230952421_ImageNames.cs" />
-    <Compile Include="Migrations\202009230952421_ImageNames.designer.cs">
-      <DependentUpon>202009230952421_ImageNames.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Booking.cs" />
@@ -1225,30 +1193,7 @@
     <EmbeddedResource Include="Migrations\202009021654163_ValidatingEntities.resx">
       <DependentUpon>202009021654163_ValidatingEntities.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009061643111_IncreasingPaint.resx">
-      <DependentUpon>202009061643111_IncreasingPaint.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009112145542_PersonValidation.resx">
-      <DependentUpon>202009112145542_PersonValidation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009121456102_ChangingWorkshopDate.resx">
-      <DependentUpon>202009121456102_ChangingWorkshopDate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009201732569_PaintQuantity.resx">
-      <DependentUpon>202009201732569_PaintQuantity.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009211740157_ManytoManyTable.resx">
-      <DependentUpon>202009211740157_ManytoManyTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009211834401_ManytoMany2.resx">
-      <DependentUpon>202009211834401_ManytoMany2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009222127367_BookingInitialise.resx">
-      <DependentUpon>202009222127367_BookingInitialise.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202009230952421_ImageNames.resx">
-      <DependentUpon>202009230952421_ImageNames.cs</DependentUpon>
-    </EmbeddedResource>
+   
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
