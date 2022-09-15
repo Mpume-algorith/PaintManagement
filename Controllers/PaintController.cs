@@ -10,7 +10,7 @@ using PaintManagement.DAL;
 using PaintManagement.Models;
 using PagedList;
 using System.Web.Services.Description;
-using PaintManagement.Migrations;
+
 using Rotativa.MVC;
 using PaintManagement.ViewModels;
 using PaintQuantity = PaintManagement.ViewModels.PaintQuantity;
