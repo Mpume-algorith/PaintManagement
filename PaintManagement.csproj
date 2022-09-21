@@ -683,9 +683,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202209151948206_InitialCrreate.cs" />
-    <Compile Include="Migrations\202209151948206_InitialCrreate.designer.cs">
-      <DependentUpon>202209151948206_InitialCrreate.cs</DependentUpon>
+    <Compile Include="Migrations\202209202300081_InitialCreate.cs" />
+    <Compile Include="Migrations\202209202300081_InitialCreate.designer.cs">
+      <DependentUpon>202209202300081_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -978,8 +978,8 @@
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202209151948206_InitialCrreate.resx">
-      <DependentUpon>202209151948206_InitialCrreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202209202300081_InitialCreate.resx">
+      <DependentUpon>202209202300081_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
