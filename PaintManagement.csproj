@@ -959,6 +959,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\Manual Scripts\" />
     <Folder Include="Views\ContentView\" />
     <Folder Include="Views\PDF\" />
   </ItemGroup>

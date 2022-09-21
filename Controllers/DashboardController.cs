@@ -91,47 +91,22 @@ namespace PaintManagement.Controllers
             return View();
         }
         
-        // I have commented this out because there is an error I am getting, which does not make sense, And I will consult James at 10am in the morning
+        
         public ActionResult DashboardDisplay()
         {
-            List<TopCustomer> topFiveCustomers = new List<TopCustomer>();
-            var orderByCustomer = (from order in db.Orders
-                                   group order by order.CustomerID
-                                  into g
-                                   orderby g.Count() descending
-                                   select new
-                                   {
-                                       CusomerId = g.Key,
-                                       Count = g.Count()
-                                   }).Take(5);
-            var customerOrderLink = (from c in db.Customers
-                                     join order in orderByCustomer
-                                     on c.CustomerID equals order.CusomerId
-                                     select new TopCustomer
-                                     {
-                                         Name = c.Name,
-                                         PhoneNumber = c.PhoneNumber,
-                                         Email = c.Email,
-                                         Orders = order.Count
-                                     }).ToList();
-            foreach (var item in customerOrderLink)
+            var list = db.Orders;
+            List<int> counts = new List<int>();
+            var customerNames = list.Select(x => x.Customer.Name).Distinct();
+            foreach(var item in customerNames)
             {
-                TopCustomer top5 = new TopCustomer();
-                top5.Name = item.Name;
-                top5.PhoneNumber = item.PhoneNumber;
-                top5.Email = item.Email;
-                top5.Orders = item.Orders;
-                topFiveCustomers.Add(top5);
+                counts.Add(list.Count(x => x.Customer.Name == item));
             }
-            //List<BestSeller> bestSellers = new List<BestSeller>();
 
-            //List<VolumeOrder> volumeOrders = new List<VolumeOrder>();
-
-            var dateTime = DateTime.Now;
-            var date = dateTime.ToString("dd/MM/yyyy");
-            ViewBag.Date = date;
-
-            return View(topFiveCustomers);
+            var customerCount = counts;
+            ViewBag.NAME = customerNames;
+            ViewBag.CUSTOMERCOUNT = customerCount.ToList();
+            
+            return View();
         }
         
         // POST: Dashboard/Create

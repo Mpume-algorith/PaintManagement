@@ -113,7 +113,7 @@ namespace PaintManagement.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "OrderID,Amount,Date,CustomerID")] Order order)
+        public ActionResult Create([Bind(Include = "OrderID,Amount,Date,Quantity,CustomerID")] Order order)
         {
             if (ModelState.IsValid)
             {
