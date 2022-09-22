@@ -11,8 +11,7 @@
         .chart-container{
             margin: auto 0;
             min-width: 10rem;
-            border-radius: 5px;
-            border: 3px dotted red;
+            border-radius: 10px;
             aspect-ratio: 1/1;
         }
     </style>
@@ -27,8 +26,8 @@
         var countsList = @Html.Raw(Json.Encode(ViewBag.CUSTOMERCOUNT));
         var customerNames = @Html.Raw(Json.Encode(ViewBag.NAME));
 
-        var ctx = $('#bar-chart');
-        var barChart = new Chart(ctx, {
+        var chart = document.getElementById('bar-chart');
+        var barChart = new Chart(chart, {
 
             type: 'bar',
             data: {
