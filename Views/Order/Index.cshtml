@@ -1,88 +1,39 @@
-﻿@model PagedList.IPagedList<PaintManagement.Models.Order>
-@using PagedList.Mvc;
-<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="~/Content/MyStyle.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
+﻿@model IEnumerable<PaintManagement.Models.Order>
 
 @{
-    ViewBag.Title = "Orders";
+    ViewBag.Title = "Index";
 }
-<img src="~/Images/285131_363979710352180_1850381867_n.jpg" style="width:80px;height:80px; float:right" />
-<h2>Orders</h2>
-<i class="fa fa-money fa-2x" style="font-size:50px; color:grey"></i>
-<hr>
+
+<h2>Index</h2>
+
 <p>
-    @Html.ActionLink("Create New", "Create", null, new { style = "font-size:larger" })
+    @Html.ActionLink("Create New", "Create")
 </p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th></th>
+    </tr>
 
-@using (Html.BeginForm("Index", "Order", FormMethod.Get))
-{
-    <p>
-        @Html.TextBox("SearchString")
-        <input type="submit" value="Search" />
-        @Html.ActionLink("Clear", "Index", null, new { @class = "btn btn-default" })
-
-    </p>
-    <p> Click on Amount to sort by Amount</p>
-    <p>Click on Quantity to sort by Quantity</p>
-    <p>Click on Date to sort by Date</p>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.OrderID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.OrderID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.OrderID })
+        </td>
+    </tr>
 }
-<hr>
-<div table class=" table-wrapper">
-    <table class="table table-bordered">
 
-        <tr>
-            <th>
-                OrderID
-            </th>
-            <th>
-                Customer
-            </th>
-            <th>
-                @Html.ActionLink("Amount", "Index", new { sortOrder = ViewBag.AmountSortParm, style = "color:white" })
-            </th>
-            <th>
-                @Html.ActionLink("Quantity", "Index", new { sortOrder = ViewBag.QuantitySortParm, style = "color:white" })
-            </th>
-            <th>
-                @Html.ActionLink("Date", "Index", new { sortOrder = ViewBag.DateSortParm, style = "color:white" })
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.OrderID)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Customer.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Amount)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Quantity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Date)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.OrderID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.OrderID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.OrderID })
-                </td>
-            </tr>
-        }
-
-    </table>
-    <br />
-    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-
-    @Html.PagedListPager(Model, page => Url.Action("Index",
-        new { page, sortOrder = ViewBag.CurrentSort }))
-</div>
+</table>

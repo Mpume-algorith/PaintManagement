@@ -63,31 +63,7 @@ namespace PaintManagement.Controllers
         }*/
         public ActionResult Revenue()
         {
-            List<Revenue> quantitySum = new List<Revenue>();
-            List<Revenue> month = new List<Revenue>();
-
-            var revenueByMonth = (from data in db.Orders
-                                  group data by data.Date.Month
-                                 into g
-                                  select new
-                                  {
-                                      monthValue = g.Key,
-                                      summedValue = g.Sum(x => x.Amount)
-                                  }).ToList();
-            foreach (var item in revenueByMonth)
-            {
-                Revenue monthList = new Revenue();
-                monthList.Month = item.monthValue.ToString("MMM");
-                month.Add(monthList);
-            }
-            foreach (var item in revenueByMonth)
-            {
-                Revenue revSum = new Revenue();
-                revSum.Amount = item.summedValue;
-                quantitySum.Add(revSum);
-            }
-            ViewBag.MONTH = month;
-            ViewBag.orderVolume = quantitySum;
+            
             return View();
         }
         
@@ -108,7 +84,11 @@ namespace PaintManagement.Controllers
             
             return View();
         }
-        
+        public ActionResult SalesByYear()
+        {
+
+            return View();
+        }
         // POST: Dashboard/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)

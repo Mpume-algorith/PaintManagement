@@ -675,6 +675,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\PaintController.cs" />
+    <Compile Include="Controllers\PaintOrderController.cs" />
     <Compile Include="Controllers\ProductOrderController.cs" />
     <Compile Include="Controllers\SupplierController.cs" />
     <Compile Include="Controllers\WorkshopController.cs" />
@@ -683,9 +684,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202209202300081_InitialCreate.cs" />
-    <Compile Include="Migrations\202209202300081_InitialCreate.designer.cs">
-      <DependentUpon>202209202300081_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\202209232139195_InitialCreate.cs" />
+    <Compile Include="Migrations\202209232139195_InitialCreate.designer.cs">
+      <DependentUpon>202209232139195_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -699,6 +700,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Paint.cs" />
+    <Compile Include="Models\PaintOrder.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\ProductOrder.cs" />
     <Compile Include="Models\Supplier.cs" />
@@ -956,6 +958,11 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\PaintOrder\Create.cshtml" />
+    <Content Include="Views\PaintOrder\Delete.cshtml" />
+    <Content Include="Views\PaintOrder\Details.cshtml" />
+    <Content Include="Views\PaintOrder\Edit.cshtml" />
+    <Content Include="Views\PaintOrder\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -979,8 +986,8 @@
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202209202300081_InitialCreate.resx">
-      <DependentUpon>202209202300081_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202209232139195_InitialCreate.resx">
+      <DependentUpon>202209232139195_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

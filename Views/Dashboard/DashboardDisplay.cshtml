@@ -8,6 +8,7 @@
     <link href="~/Content/Chart.min.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <style>
+       
         .chart-container{
             margin: auto 0;
             min-width: 10rem;
@@ -19,14 +20,16 @@
 <body>
     <h1>Bar Chart</h1>
     <div class="chart-container">
-        <canvas id="bar-chart"></canvas>
+        <canvas id="top-customers"></canvas>
+        <canvas id="salesByYear"></canvas>
     </div>
 
     <script>
+        //TOP 5 CUSTOMERS
         var countsList = @Html.Raw(Json.Encode(ViewBag.CUSTOMERCOUNT));
         var customerNames = @Html.Raw(Json.Encode(ViewBag.NAME));
 
-        var chart = document.getElementById('bar-chart');
+        var chart = document.getElementById('top-customers');
         var barChart = new Chart(chart, {
 
             type: 'bar',
@@ -46,6 +49,9 @@
                 legend: { dsiplay: false }
             },
         });
+
+        //SALES BY YEAR
+
 
     </script>
 </body>

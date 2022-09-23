@@ -39,12 +39,12 @@ namespace PaintManagement.DAL
             context.SaveChanges();
             var paints = new List<Paint>
              {
-                 new Paint{Name = "Lourain's Cream", CostPrice = 100, SalePrice = 110, Size = "250l", ProductOrders = new List<ProductOrder>(), Orders = new List<Order>()},
-              new Paint { Name = "Corey Blue", CostPrice = 80, SalePrice = 90, Size = "28ml", ProductOrders = new List<ProductOrder>(), Orders = new List<Order>() },
-              new Paint { Name = "Clear Glaze", CostPrice = 80, SalePrice = 90, Size="28ml", ProductOrders = new List<ProductOrder>(), Orders = new List<Order>()},
-              new Paint {Name ="Karema", CostPrice = 170, SalePrice = 187, Size = "500ml", ProductOrders = new List<ProductOrder>(), Orders = new List<Order>()},
-              new Paint {Name= "Asgat", CostPrice = 270, SalePrice = 288, Size = "1l", ProductOrders = new List<ProductOrder>(), Orders = new List<Order>()},
-              new Paint {Name = "Godfrey's Glimpse", CostPrice = 110, SalePrice= 117, Size = "250ml",  ProductOrders = new List<ProductOrder>(), Orders = new List<Order>()}
+              new Paint{Name = "Lourain's Cream", CostPrice = 100, SalePrice = 110, Size = "250l", ProductOrders = new List<ProductOrder>(), PaintOrders = new List<PaintOrder>()},
+              new Paint { Name = "Corey Blue", CostPrice = 80, SalePrice = 90, Size = "28ml", ProductOrders = new List<ProductOrder>(), PaintOrders = new List<PaintOrder>() },
+              new Paint { Name = "Clear Glaze", CostPrice = 80, SalePrice = 90, Size="28ml", ProductOrders = new List<ProductOrder>(), PaintOrders = new List<PaintOrder>()},
+              new Paint {Name ="Karema", CostPrice = 170, SalePrice = 187, Size = "500ml", ProductOrders = new List<ProductOrder>(), PaintOrders = new List<PaintOrder>()},
+              new Paint {Name= "Asgat", CostPrice = 270, SalePrice = 288, Size = "1l", ProductOrders = new List<ProductOrder>(), PaintOrders = new List<PaintOrder>()},
+              new Paint {Name = "Godfrey's Glimpse", CostPrice = 110, SalePrice= 117, Size = "250ml",  ProductOrders = new List<ProductOrder>(), PaintOrders = new List<PaintOrder>()}
              };
             paints.ForEach(p => context.Paints.Add(p));
             context.SaveChanges();
@@ -62,16 +62,16 @@ namespace PaintManagement.DAL
             context.SaveChanges();
             var orders = new List<Order>
             {
-                new Order{Amount = 260,Quantity = 2, Date = DateTime.Parse("2019-04-03"),
-                             CustomerID = customers.Single(o =>o.Name =="Davie Jones").CustomerID, Paints = new List<Paint>()},
-               new Order {Amount = 100, Quantity = 1,Date = DateTime.Parse("2019-07-27"),
-                             CustomerID = customers.Single(o => o.Name == "Busi Mudimo").CustomerID, Paints = new List<Paint>()},
-               new Order {Amount = 400, Quantity = 4, Date = DateTime.Parse("2019-02-19"),
-                             CustomerID = customers.Single(o => o.Name == "John Doe").CustomerID, Paints = new List<Paint>()},
-               new Order {Amount = 350,Quantity = 4, Date = DateTime.Parse("2019-07-05"),
-                             CustomerID = customers.Single(o =>o.Name =="Mary Jane").CustomerID, Paints = new List<Paint>()},
-               new Order {Amount = 500,Quantity = 5, Date = DateTime.Parse("2019-01-18"),
-                            CustomerID = customers.Single(o => o.Name == "Susan Scott").CustomerID, Paints = new List<Paint>()},
+               new Order{Date = DateTime.Parse("2019-04-03"),
+                             CustomerID = customers.Single(o =>o.Name =="Davie Jones").CustomerID, PaintOrders = new List<PaintOrder>()},
+               new Order {Date = DateTime.Parse("2019-07-27"),
+                             CustomerID = customers.Single(o => o.Name == "Busi Mudimo").CustomerID, PaintOrders = new List<PaintOrder>()},
+               new Order {Date = DateTime.Parse("2019-02-19"),
+                             CustomerID = customers.Single(o => o.Name == "John Doe").CustomerID, PaintOrders = new List<PaintOrder>()},
+               new Order {Date = DateTime.Parse("2019-07-05"),
+                             CustomerID = customers.Single(o =>o.Name =="Mary Jane").CustomerID, PaintOrders = new List<PaintOrder>()},
+               new Order {Date = DateTime.Parse("2019-01-18"),
+                            CustomerID = customers.Single(o => o.Name == "Susan Scott").CustomerID, PaintOrders = new List<PaintOrder>()},
 
 
             };
@@ -80,12 +80,11 @@ namespace PaintManagement.DAL
 
             var workshops = new List<Workshop>
             {
-                 new Workshop{Bookings = new List<Booking>(),Description = "Furn0901", Date = DateTime.Parse("2020-09-14"), Time = DateTime.Parse("15:10"), Place = "15 Reed Rd, Green Point"},
+                new Workshop{Bookings = new List<Booking>(),Description = "Furn0901", Date = DateTime.Parse("2020-09-14"), Time = DateTime.Parse("15:10"), Place = "15 Reed Rd, Green Point"},
                 new Workshop{Bookings = new List<Booking>(),Description ="Bag0902", Date = DateTime.Parse("2020-09-19"), Time = DateTime.Parse("15:10"), Place = "15 Reed Rd, Green Point"},
                 new Workshop {Bookings = new List<Booking>(),Description = "Ch0718" ,Date = DateTime.Parse("2020-09-21"), Time = DateTime.Parse("14:00"), Place = "250 Fig Street, Green Point"},
                 new Workshop{Bookings = new List<Booking>(),Description = "Clo0625", Date = DateTime.Parse("2020-09-26"), Time = DateTime.Parse("14:00"), Place = "250 Fig Street, Green Point"},
                 new Workshop {Bookings = new List<Booking>(),Description = "Sho0705", Date = DateTime.Parse("2020-09-28"),Time = DateTime.Parse("12:00"), Place = "25 Green Street, Green Point"},
-
             };
             workshops.ForEach(w => context.Workshops.Add(w));
             context.SaveChanges();

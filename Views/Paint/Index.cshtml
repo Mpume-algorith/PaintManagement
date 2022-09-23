@@ -1,112 +1,64 @@
-﻿@model PagedList.IPagedList<PaintManagement.Models.Paint>
-@using PagedList.Mvc;
-    <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="~/Content/MyStyle.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+﻿@model IEnumerable<PaintManagement.Models.Paint>
 
-          @{ ViewBag.Title = "Paint"; }
+@{
+    ViewBag.Title = "Index";
+}
 
+<h2>Index</h2>
 
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Image
+        </th>
+        <th>
+            @Html.ActionLink("PaintID", "Index", new { sortOrder = ViewBag.IDSortParm, currentFilter = ViewBag.CurrentFilter, style = "color:white" })
+        </th>
+        <th>
+            @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter, style = "color:white" })
+        </th>
+        <th>
+            Cost Price
+        </th>
+        <th>
+            Sale Price
+        </th>
+        <th>
+            Size (ml/l)
+        </th>
+        <th></th>
+    </tr>
 
-<html lang="en">
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Table</title>
-</head>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(model => item.Image) <img src="~/Images/@item.ImagePath" alt="Image" height="150" width="150" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PaintID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CostPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SalePrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Size)
+        </td>
 
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PaintID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PaintID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PaintID })
+        </td>
+    </tr>
+}
 
-<body>
-
-    <h2>Paint Products</h2>
-    <i class="fa fa-shopping-basket fa-2x" style="font-size:50px; color:grey"></i>
-
-    <hr>
-    <p>
-        @Html.ActionLink("Create New", "Create", null, new { style = "font-size:larger" })
-    </p>
-    @using (Html.BeginForm("Index", "Paint", FormMethod.Get))
-    {
-        <p>
-            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-            <input type="submit" value="Search" />
-            @Html.ActionLink("Clear", "Index", null, new { @class = "btn btn-default" })
-        </p>
-
-        <p>Click on PaintID below to sort by ID</p>
-        <p>Click on Name below to sort by name</p>
-    }
-
-    <hr>
-    <div style="text-align:left">@Html.ActionLink("Stock Check","PaintAmountByName")</div>
-    <div class="table-wrapper">
-        <table class="table table-bordered">
-            <tr>
-                <th>
-                    Image
-                </th>
-                <th>
-                    @Html.ActionLink("PaintID", "Index", new { sortOrder = ViewBag.IDSortParm, currentFilter = ViewBag.CurrentFilter, style = "color:white" })
-                </th>
-                <th>
-                    @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter, style = "color:white" })
-                </th>
-                <th>
-                    CostPrice
-                </th>
-                <th>
-                    SalePrice
-                </th>
-                <th>
-                    Size(ml/l)
-                </th>
-                <th>Quantity</th>
-            </tr>
-
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(model => item.Image) <img src="~/Images/@item.ImagePath" alt="Image" height="150" width="150" />
-
-                    </td>
-
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PaintID)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CostPrice)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SalePrice)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Size)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Quantity)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.PaintID, style = "color:black" }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.PaintID, style = "color:black" }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.PaintID, style = "color:black" })
-                    </td>
-                </tr>
-            }
-
-        </table>
-    </div>
-    <br />
-    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
-
-
-
-</body>
-
-</html>
-<div class="footer">
-    <p>2020 Green Gecko Paint Management</p>
-</div>
+</table>

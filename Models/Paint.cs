@@ -24,7 +24,6 @@ namespace PaintManagement.Models
         [Required]
         public string Size { get; set; }
 
-        public int Quantity { get; set; }
         public string ImagePath { get; set; }
 
         [AllowHtml]
@@ -39,7 +38,7 @@ namespace PaintManagement.Models
 
         //navigation properties
         public virtual ICollection<ProductOrder> ProductOrders { get; set; }
-        public virtual ICollection<Order>Orders { get; set; }
+        public virtual ICollection<PaintOrder> PaintOrders { get; set; }
 
 
     }

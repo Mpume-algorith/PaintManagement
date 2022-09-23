@@ -1,12 +1,9 @@
 ﻿@model PaintManagement.Models.Order
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 @{
     ViewBag.Title = "Details";
 }
-<img src="~/Images/285131_363979710352180_1850381867_n.jpg" style="width:80px;height:80px; float:right" />
 
-<i class="fa fa-money fa-2x" style="font-size:50px; color:grey"></i>
 <h2>Details</h2>
 
 <div>
@@ -22,45 +19,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Amount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Amount)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.Date)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Date)
-        </dd>
-        <h5><b>Paints</b></h5>
-        <dd>
-            <table class="table">
-                <tr>
-                    <th>Name</th>
-                    <th>Size</th>
-                    <th> Sale Price</th>
-                </tr>
-                @foreach (var item in Model.Paints)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Name)
-
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Size)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modeltItem => item.SalePrice)
-                        </td>
-                    </tr>
-                }
-
-            </table>
         </dd>
 
     </dl>
@@ -69,6 +32,3 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.OrderID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
-<div class="footer">
-    <p>2020 Green Gecko Paint Management</p>
-</div>

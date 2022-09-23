@@ -11,112 +11,116 @@ using PaintManagement.Models;
 
 namespace PaintManagement.Controllers
 {
-    public class OrderController : Controller
+    public class PaintOrderController : Controller
     {
         private PaintContext db = new PaintContext();
 
-        // GET: Order
+        // GET: PaintOrder
         public ActionResult Index()
         {
-            var orders = db.Orders.Include(o => o.Customer);
-            return View(orders.ToList());
+            var paintOrders = db.PaintOrders.Include(p => p.Order).Include(p => p.Paint);
+            return View(paintOrders.ToList());
         }
 
-        // GET: Order/Details/5
+        // GET: PaintOrder/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Order order = db.Orders.Find(id);
-            if (order == null)
+            PaintOrder paintOrder = db.PaintOrders.Find(id);
+            if (paintOrder == null)
             {
                 return HttpNotFound();
             }
-            return View(order);
+            return View(paintOrder);
         }
 
-        // GET: Order/Create
+        // GET: PaintOrder/Create
         public ActionResult Create()
         {
-            ViewBag.CustomerID = new SelectList(db.Customers, "CustomerID", "Name");
+            ViewBag.OrderID = new SelectList(db.Orders, "OrderID", "OrderID");
+            ViewBag.PaintID = new SelectList(db.Paints, "PaintID", "Name");
             return View();
         }
 
-        // POST: Order/Create
+        // POST: PaintOrder/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "OrderID,CustomerID,Date")] Order order)
+        public ActionResult Create([Bind(Include = "PaintOrderID,OrderID,PaintID,Quantity")] PaintOrder paintOrder)
         {
             if (ModelState.IsValid)
             {
-                db.Orders.Add(order);
+                db.PaintOrders.Add(paintOrder);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CustomerID = new SelectList(db.Customers, "CustomerID", "Name", order.CustomerID);
-            return View(order);
+            ViewBag.OrderID = new SelectList(db.Orders, "OrderID", "OrderID", paintOrder.OrderID);
+            ViewBag.PaintID = new SelectList(db.Paints, "PaintID", "Name", paintOrder.PaintID);
+            return View(paintOrder);
         }
 
-        // GET: Order/Edit/5
+        // GET: PaintOrder/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Order order = db.Orders.Find(id);
-            if (order == null)
+            PaintOrder paintOrder = db.PaintOrders.Find(id);
+            if (paintOrder == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CustomerID = new SelectList(db.Customers, "CustomerID", "Name", order.CustomerID);
-            return View(order);
+            ViewBag.OrderID = new SelectList(db.Orders, "OrderID", "OrderID", paintOrder.OrderID);
+            ViewBag.PaintID = new SelectList(db.Paints, "PaintID", "Name", paintOrder.PaintID);
+            return View(paintOrder);
         }
 
-        // POST: Order/Edit/5
+        // POST: PaintOrder/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "OrderID,CustomerID,Date")] Order order)
+        public ActionResult Edit([Bind(Include = "PaintOrderID,OrderID,PaintID,Quantity")] PaintOrder paintOrder)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(order).State = EntityState.Modified;
+                db.Entry(paintOrder).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CustomerID = new SelectList(db.Customers, "CustomerID", "Name", order.CustomerID);
-            return View(order);
+            ViewBag.OrderID = new SelectList(db.Orders, "OrderID", "OrderID", paintOrder.OrderID);
+            ViewBag.PaintID = new SelectList(db.Paints, "PaintID", "Name", paintOrder.PaintID);
+            return View(paintOrder);
         }
 
-        // GET: Order/Delete/5
+        // GET: PaintOrder/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Order order = db.Orders.Find(id);
-            if (order == null)
+            PaintOrder paintOrder = db.PaintOrders.Find(id);
+            if (paintOrder == null)
             {
                 return HttpNotFound();
             }
-            return View(order);
+            return View(paintOrder);
         }
 
-        // POST: Order/Delete/5
+        // POST: PaintOrder/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Order order = db.Orders.Find(id);
-            db.Orders.Remove(order);
+            PaintOrder paintOrder = db.PaintOrders.Find(id);
+            db.PaintOrders.Remove(paintOrder);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

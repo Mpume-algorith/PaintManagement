@@ -22,6 +22,7 @@ namespace PaintManagement.DAL
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<Workshop> Workshops { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<PaintOrder> PaintOrders { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
   
         public DbSet<ProductOrder> ProductOrders { get; set; }
