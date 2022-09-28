@@ -28,6 +28,7 @@
         //TOP 5 CUSTOMERS
         var countsList = @Html.Raw(Json.Encode(ViewBag.CUSTOMERCOUNT));
         var customerNames = @Html.Raw(Json.Encode(ViewBag.NAME));
+        var sumOfOrders = @Html.Raw(Json.Encode(ViewBag.ORDERSUM));
 
         var chart = document.getElementById('top-customers');
         var barChart = new Chart(chart, {
@@ -36,12 +37,18 @@
             data: {
                 labels: customerNames,
                 datasets: [{
-                    label: 'Top Customers',
+                    label: 'Top Customers By Orders Made',
                     data: countsList,
                     backgroundColor: ["rgba(242,166,54,.5)", "rgba(145,65,72,.5)", "(74,25,92,.5)"],
                     borderColor: ["rgb(242,166,54)", "rgb(145,65,72)", "rgb(74,25,92)"],
                     borderWidth:1
-                }]
+                },{
+                    label: 'Top Customers By Items Orderd',
+                    data: sumOfOrders,
+                    backgroundColor: ["rgba(242,166,54,.5)", "rgba(145,65,72,.5)", "(74,25,92,.5)"],
+                    borderColor: ["rgb(242,166,54)", "rgb(145,65,72)", "rgb(74,25,92)"],
+                    borderWidth: 1
+                    }]
             },
             options: {
                 maintainAspectRation: false,

@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using PaintManagement.Models;
 using PaintManagement.ViewModels;
+using System.Windows.Input;
 
 namespace PaintManagement.Controllers
 {
@@ -70,18 +71,63 @@ namespace PaintManagement.Controllers
         
         public ActionResult DashboardDisplay()
         {
+
             var list = db.Orders;
             List<int> counts = new List<int>();
+            List<int> orders = new List<int>();
             var customerNames = list.Select(x => x.Customer.Name).Distinct();
-            foreach(var item in customerNames)
+            
+            /// I want to attach the sum of orders to the name of the customer
+            var quantByOrderID = from item1 in db.PaintOrders
+                                 join item2 in db.Orders
+                                 on item1.OrderID equals item2.OrderID
+                                 select new
+                                 {
+                                     OrderID = item2.OrderID,
+                                     CustomerID = item2.CustomerID,
+                                     Quantity = item1.Quantity
+                                 };
+
+            var quantByName = from item1 in quantByOrderID
+                              join item2 in db.Customers
+                              on item1.CustomerID equals item2.CustomerID
+                              select new
+                              {
+                                  CustomerName = item2.Name,
+                                  Quantity = item1.Quantity,
+                              };
+            var orderByName = from item in quantByName
+                              group item by item.CustomerName into g
+                              let sumOfOrders = g.Sum(x => x.Quantity)
+                              select new
+                              {
+                                  Key = g.Key,
+                                  SumOfOrders = sumOfOrders,
+                              };
+
+            foreach (var item in customerNames)
             {
                 counts.Add(list.Count(x => x.Customer.Name == item));
+                foreach (var item1 in orderByName)
+                {
+                    if (item == item1.Key)
+                    {
+                        orders.Add(item1.SumOfOrders);
+                    }
+                }
             }
-
+            var orderSum = orders;
             var customerCount = counts;
             ViewBag.NAME = customerNames;
             ViewBag.CUSTOMERCOUNT = customerCount.ToList();
-            
+            ViewBag.ORDERSUM = orderSum.ToList();
+
+
+
+            //ViewBag.SumOfOrders = orderQuantity.ToList();
+
+
+
             return View();
         }
         public ActionResult SalesByYear()
