@@ -21,7 +21,9 @@
     <h1>Bar Chart</h1>
     <div class="chart-container">
         <canvas id="top-customers"></canvas>
-        <canvas id="salesByYear"></canvas>
+        <br />
+        <h2>Line Chart</h2>
+        <canvas id="profitByMonth"></canvas>
     </div>
 
     <script>
@@ -39,14 +41,14 @@
                 datasets: [{
                     label: 'Top Customers By Orders Made',
                     data: countsList,
-                    backgroundColor: ["rgba(242,166,54,.5)", "rgba(145,65,72,.5)", "(74,25,92,.5)"],
-                    borderColor: ["rgb(242,166,54)", "rgb(145,65,72)", "rgb(74,25,92)"],
+                    backgroundColor: ["rgba(242,166,54,.5)"],
+                    borderColor: ["rgb(242,166,54)"],
                     borderWidth:1
                 },{
                     label: 'Top Customers By Items Orderd',
                     data: sumOfOrders,
-                    backgroundColor: ["rgba(242,166,54,.5)", "rgba(145,65,72,.5)", "(74,25,92,.5)"],
-                    borderColor: ["rgb(242,166,54)", "rgb(145,65,72)", "rgb(74,25,92)"],
+                    backgroundColor: ["rgba(145,65,72,.5)"],
+                    borderColor: ["rgb(145,65,72)"],
                     borderWidth: 1
                     }]
             },
@@ -55,11 +57,33 @@
                 scales: { xAxes: [{ ticks: { beginAtZero: true } }] },
                 legend: { dsiplay: false }
             },
-        });
-
+        });                              
+    </script>
+    <script>
         //SALES BY YEAR
+        var profitByMonth = @Html.Raw(Json.Encode(ViewBag.PROFITS));
 
+        var chart1 = document.getElementById('profitByMonth');
+        var xLabels = ['Jan', 'Feb', 'March', 'April', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        var lineChart = new Chart(chart1, {
 
+            type: 'bar',
+            data: {
+                labels: xLabels,
+                datasets: [{
+                    label: 'Profit By Month',
+                    data: profitByMonth,
+                    backgroundColor: ["rgba(242,166,54,.5)", "rgba(145,65,72,.5)", "(74,25,92,.5)"],
+                    borderColor: ["rgb(242,166,54)", "rgb(145,65,72)", "rgb(74,25,92)"],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                maintainAspectRation: false,
+                scales: { xAxes: [{ ticks: { beginAtZero: true } }] },
+                legend: { dsiplay: false }
+            },
+        });
     </script>
 </body>
 

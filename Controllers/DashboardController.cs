@@ -71,7 +71,7 @@ namespace PaintManagement.Controllers
         
         public ActionResult DashboardDisplay()
         {
-
+            #region TopCustomer Bar Chart
             var list = db.Orders;
             List<int> counts = new List<int>();
             List<int> orders = new List<int>();
@@ -121,8 +121,53 @@ namespace PaintManagement.Controllers
             ViewBag.NAME = customerNames;
             ViewBag.CUSTOMERCOUNT = customerCount.ToList();
             ViewBag.ORDERSUM = orderSum.ToList();
+            #endregion
+            #region Sales By Year Char
 
+            #endregion
+            #region Profit By Month
+            List<decimal> profits = new List<decimal>();
 
+            var paintJoinPaintOrder = from item1 in db.Paints
+                                      join item2 in db.PaintOrders
+                                      on item1.PaintID equals item2.PaintID
+                                      select new
+                                      {
+                                          PaintID = item1.PaintID,
+                                          OrderID = item2.OrderID,
+                                          CostPrice = item1.CostPrice,
+                                          SalePrice = item1.SalePrice,
+                                          Quantity = item2.Quantity,
+                                      };
+            var paintJoinOrder = from item1 in paintJoinPaintOrder
+                                 join item2 in db.Orders
+                                 on item1.OrderID equals item2.OrderID
+                                 select new
+                                 {
+                                     PaintID = item1.PaintID,
+                                     OrderID = item1.OrderID,
+                                     CostPrice = item1.CostPrice,
+                                     SalePrice = item1.SalePrice,
+                                     Quantity = item1.Quantity,
+                                     Date = item2.Date.Month
+                                 };
+            var profitByMonth = from item in paintJoinOrder
+
+                                group item by new { item.Date, item.PaintID } into g
+
+                                select new
+                                {
+                                    Month = g.Key.Date,
+                                    PaintID = g.Key.PaintID,
+                                    Profit = (g.Sum(x => x.SalePrice) - g.Sum(x => x.CostPrice)) * paintJoinOrder.Sum(x => x.Quantity)
+                                };
+            foreach (var item in profitByMonth)
+            {
+                profits.Add(item.Profit);
+            }
+            var MonthlyProfits = profits.ToList();
+            ViewBag.PROFITS = MonthlyProfits;
+            #endregion
 
             //ViewBag.SumOfOrders = orderQuantity.ToList();
 
@@ -130,11 +175,7 @@ namespace PaintManagement.Controllers
 
             return View();
         }
-        public ActionResult SalesByYear()
-        {
 
-            return View();
-        }
         // POST: Dashboard/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
