@@ -21,7 +21,7 @@ namespace PaintManagement.Models
         public decimal CostPrice { get; set; }
         [DataType(DataType.Currency)]
         public decimal SalePrice { get; set; }
-        [Required]
+        [Required] 
         public string Size { get; set; }
 
         public string ImagePath { get; set; }
