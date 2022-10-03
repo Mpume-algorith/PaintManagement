@@ -142,31 +142,31 @@ namespace PaintManagement.Controllers
             var paintJoinOrder = from item1 in paintJoinPaintOrder
                                  join item2 in db.Orders
                                  on item1.OrderID equals item2.OrderID
+                                 orderby item2.Date.Month ascending
+                                 let computation = (item1.SalePrice - item1.CostPrice) * item1.Quantity
                                  select new
                                  {
+                                     Date = item2.Date.Month,
                                      PaintID = item1.PaintID,
-                                     OrderID = item1.OrderID,
-                                     CostPrice = item1.CostPrice,
-                                     SalePrice = item1.SalePrice,
-                                     Quantity = item1.Quantity,
-                                     Date = item2.Date.Month
+                                     Profit = computation,                                                                      
                                  };
-            var profitByMonth = from item in paintJoinOrder
 
-                                group item by new { item.Date, item.PaintID } into g
+            var profitByMonth = (from item in paintJoinOrder
+                                  group item by item.Date into g
+                                  select new
+                                  {
+                                      Date = g.Key,
+                                      SumProfit = g.Sum(x => x.Profit)
+                                  }).ToList();
 
-                                select new
-                                {
-                                    Month = g.Key.Date,
-                                    PaintID = g.Key.PaintID,
-                                    Profit = (g.Sum(x => x.SalePrice) - g.Sum(x => x.CostPrice)) * paintJoinOrder.Sum(x => x.Quantity)
-                                };
-            foreach (var item in profitByMonth)
+
+                             
+            foreach(var item in profitByMonth)
             {
-                profits.Add(item.Profit);
+                profits.Add(item.SumProfit);
+                
             }
-            var MonthlyProfits = profits.ToList();
-            ViewBag.PROFITS = MonthlyProfits;
+            ViewBag.MonthlyProfit = profits;
             #endregion
 
             //ViewBag.SumOfOrders = orderQuantity.ToList();

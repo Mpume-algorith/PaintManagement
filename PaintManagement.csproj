@@ -692,6 +692,10 @@
     <Compile Include="Migrations\202209302355196_SeedDataIncrease.designer.cs">
       <DependentUpon>202209302355196_SeedDataIncrease.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202210010047005_DeletedObsoleteOrderData.cs" />
+    <Compile Include="Migrations\202210010047005_DeletedObsoleteOrderData.designer.cs">
+      <DependentUpon>202210010047005_DeletedObsoleteOrderData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Booking.cs" />
@@ -995,6 +999,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202209302355196_SeedDataIncrease.resx">
       <DependentUpon>202209302355196_SeedDataIncrease.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202210010047005_DeletedObsoleteOrderData.resx">
+      <DependentUpon>202210010047005_DeletedObsoleteOrderData.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

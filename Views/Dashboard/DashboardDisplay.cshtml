@@ -61,13 +61,13 @@
     </script>
     <script>
         //SALES BY YEAR
-        var profitByMonth = @Html.Raw(Json.Encode(ViewBag.PROFITS));
+        var profitByMonth = @Html.Raw(Json.Encode(ViewBag.MonthlyProfit));
 
         var chart1 = document.getElementById('profitByMonth');
         var xLabels = ['Jan', 'Feb', 'March', 'April', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
         var lineChart = new Chart(chart1, {
 
-            type: 'bar',
+            type: 'line',
             data: {
                 labels: xLabels,
                 datasets: [{
