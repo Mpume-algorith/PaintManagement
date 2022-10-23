@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="~/Scripts/jquery-3.5.1.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/bootstrap.bundle.min.js"></script>
     <link href="~/Content/Chart.min.css" rel="stylesheet" />
@@ -24,6 +25,12 @@
         <br />
         <h2>Line Chart</h2>
         <canvas id="profitByMonth"></canvas>
+        <div class="select">
+            <select id="profitYears">
+                <option value="@Html.Raw(Json.Encode(ViewBag.MonthlyProfit[0])), @Html.Raw(Json.Encode(ViewBag.MonthlyProfit[1])), @Html.Raw(Json.Encode(ViewBag.MonthlyProfit[2])), @Html.Raw(Json.Encode(ViewBag.MonthlyProfit[3])), @Html.Raw(Json.Encode(ViewBag.MonthlyProfit[4])), @Html.Raw(Json.Encode(ViewBag.MonthlyProfit[5])), @Html.Raw(Json.Encode(ViewBag.MonthlyProfit[6])), @Html.Raw(Json.Encode(ViewBag.MonthlyProfit[7])), @Html.Raw(Json.Encode(ViewBag.MonthlyProfit[8])), @Html.Raw(Json.Encode(ViewBag.MonthlyProfit[9])), @Html.Raw(Json.Encode(ViewBag.MonthlyProfit[10])), @Html.Raw(Json.Encode(ViewBag.MonthlyProfit[11]))">Year1</option>
+                <option value="23,40,10,23,22,47,48,199,38,90,23,150">Year2</option>
+            </select>
+        </div>
     </div>
 
     <script>
@@ -57,11 +64,11 @@
                 scales: { xAxes: [{ ticks: { beginAtZero: true } }] },
                 legend: { dsiplay: false }
             },
-        });                              
-    </script>
-    <script>
+        });
         //SALES BY YEAR
-        var profitByMonth = @Html.Raw(Json.Encode(ViewBag.MonthlyProfit));
+        var profitByMonth = @Html.Raw(Json.Encode(ViewBag.MonthlyProfit));     
+        
+        var profitByMonthArray = @Html.Raw(Json.Encode(ViewBag.MonthlyProfitsString));
 
         var chart1 = document.getElementById('profitByMonth');
         var xLabels = ['Jan', 'Feb', 'March', 'April', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -84,6 +91,16 @@
                 legend: { dsiplay: false }
             },
         });
+
+        const profitYears = document.getElementById('profitYears');
+        profitYears.addEventListener('change', profitTracker);
+        function profitTracker() {
+
+            console.log(profitYears.value);    
+            //profitYears.value
+            lineChart.data.datasets[0].data = profitYears.value.split(",");
+            lineChart.update();
+        }
     </script>
 </body>
 

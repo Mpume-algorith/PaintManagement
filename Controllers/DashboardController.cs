@@ -158,20 +158,14 @@ namespace PaintManagement.Controllers
                                       Date = g.Key,
                                       SumProfit = g.Sum(x => x.Profit)
                                   }).ToList();
-
-
-                             
+                       
             foreach(var item in profitByMonth)
             {
                 profits.Add(item.SumProfit);
-                
+ 
             }
             ViewBag.MonthlyProfit = profits;
             #endregion
-
-            //ViewBag.SumOfOrders = orderQuantity.ToList();
-
-
 
             return View();
         }
